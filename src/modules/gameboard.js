@@ -76,6 +76,7 @@ class Gameboard {
   }
 
   attackShip(x, y) {
+    // TODO not working => don't know why
     const currentItem = this.gameboard[x][y];
     const ship = this.ships.find((ship) => ship.shipNumber === currentItem);
     if (ship) {

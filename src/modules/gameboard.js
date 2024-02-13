@@ -19,7 +19,8 @@ class Gameboard {
     }
   }
 
-  placeShip(ship, x, y) {
+  placeShipVertical(ship, x, y) {
+    //changed name for logic reason
     let z = 1;
     if (this.gameboard[x][y] !== 0) {
       console.log("Hallo, hier ist ein Schiff! Platziere es bitte wo anders");
@@ -28,6 +29,49 @@ class Gameboard {
         if ([x + i] > 9) {
           this.gameboard[x - z][y] = ship.shipNumber;
           z++;
+        } else {
+          this.gameboard[x + i][y] = ship.shipNumber;
+        }
+      }
+      this.ships.push(ship);
+    }
+  }
+  // TODO add place functions for different variations in placement
+  placeShipHorizontal(ship, x, y) {
+    let z = 1;
+    if (this.gameboard[x][y] !== 0) {
+      console.log("Hallo, hier ist ein Schiff! Platziere es bitte wo anders");
+    } else {
+      for (let i = 0; i < ship.shipLength(); i++) {
+        if ([x + i] > 9 || [y + i] > 9) {
+          this.gameboard[x][y - z] = ship.shipNumber;
+          z++;
+        } else {
+          this.gameboard[x][y + i] = ship.shipNumber;
+        }
+      }
+      this.ships.push(ship);
+    }
+  }
+  placeShipCorner(ship, x, y) {
+    let w = 1;
+    if (this.gameboard[x][y] !== 0) {
+      console.log("Hallo, hier ist ein Schiff! Platziere es bitte wo anders");
+    } else {
+      // TODO overwork placement for end placement
+      for (let i = 0; i < ship.shipLength() - 1; i++) {
+        if ([x + i] > 9 || [x - i] < 0 || [y + i] > 9 || [y - i] < 0) {
+          this.gameboard[x][y + w] = ship.shipNumber;
+          w++;
+        } else {
+          this.gameboard[x][y - i] = ship.shipNumber;
+        }
+      }
+      w = 1;
+      for (let i = 0; i < ship.shipLength() - 1; i++) {
+        if ([x + i] > 9 || [x - i] < 0 || [y + i] > 9 || [y - i] < 0) {
+          this.gameboard[x + w][y] = ship.shipNumber;
+          w++;
         } else {
           this.gameboard[x + i][y] = ship.shipNumber;
         }

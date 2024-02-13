@@ -3,9 +3,11 @@
 import { Gameboard } from "./gameboard";
 
 class Player {
-  constructor(name) {
+  constructor(name, gameboard) {
     this.name = name;
-    this.enemyGameboard = new Gameboard();
+    //added gameboard as variable => so enemy gameboard is not an empty array
+    // TODO want to change that later so that it does not have to be created outside of gameboard
+    this.enemyGameboard = gameboard;
   }
 
   attackEnemy(x, y) {
